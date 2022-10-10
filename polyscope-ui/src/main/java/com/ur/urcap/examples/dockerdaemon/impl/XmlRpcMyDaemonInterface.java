@@ -27,31 +27,32 @@ public class XmlRpcMyDaemonInterface {
 
 	public boolean isReachable() {
 		try {
-			client.execute("get_title", new ArrayList<String>());
+			// this.client.execute("reachable", new ArrayList<String>());
+			this.client.execute("reachable", new ArrayList<String>());
 			return true;
 		} catch (XmlRpcException e) {
 			return false;
 		}
 	}
 
-	public String getTitle() throws XmlRpcException, UnknownResponseException {
-		Object result = client.execute("get_title", new ArrayList<String>());
-		return processString(result);
-	}
+	// public String getTitle() throws XmlRpcException, UnknownResponseException {
+	// 	Object result = client.execute("get_title", new ArrayList<String>());
+	// 	return processString(result);
+	// }
 
-	public String setTitle(String title) throws XmlRpcException, UnknownResponseException {
-		ArrayList<String> args = new ArrayList<String>();
-		args.add(title);
-		Object result = client.execute("set_title", args);
-		return processString(result);
-	}
+	// public String setTitle(String title) throws XmlRpcException, UnknownResponseException {
+	// 	ArrayList<String> args = new ArrayList<String>();
+	// 	args.add(title);
+	// 	Object result = client.execute("set_title", args);
+	// 	return processString(result);
+	// }
 
-	public String getMessage(String name) throws XmlRpcException, UnknownResponseException {
-		ArrayList<String> args = new ArrayList<String>();
-		args.add(name);
-		Object result = client.execute("get_message", args);
-		return processString(result);
-	}
+	// public String getMessage(String name) throws XmlRpcException, UnknownResponseException {
+	// 	ArrayList<String> args = new ArrayList<String>();
+	// 	args.add(name);
+	// 	Object result = client.execute("get_message", args);
+	// 	return processString(result);
+	// }
 
 	private boolean processBoolean(Object response) throws UnknownResponseException {
 		if (response instanceof Boolean) {

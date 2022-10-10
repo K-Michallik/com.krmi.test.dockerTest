@@ -2,7 +2,7 @@ package com.ur.urcap.examples.dockerdaemon.impl;
 
 import com.ur.urcap.api.contribution.docker.DockerRegistrationService;
 import com.ur.urcap.api.contribution.installation.swing.SwingInstallationNodeService;
-import com.ur.urcap.api.contribution.program.swing.SwingProgramNodeService;
+// import com.ur.urcap.api.contribution.program.swing.SwingProgramNodeService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -14,7 +14,7 @@ public class Activator implements BundleActivator {
 
 		context.registerService(DockerRegistrationService.class, daemonService, null);
 		context.registerService(SwingInstallationNodeService.class, installationNodeService, null);
-		context.registerService(SwingProgramNodeService.class, new DockerDaemonProgramNodeService(), null);
+		// context.registerService(SwingProgramNodeService.class, new DockerDaemonProgramNodeService(), null);
 	}
 
 	@Override
