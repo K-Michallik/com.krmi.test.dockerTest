@@ -11,9 +11,9 @@ cp -r LICENSE ${TARGET}/temp
 cp -r polyscope-ui/target/polyscope-ui-1.0-SNAPSHOT.jar ${TARGET}/temp/polyscope-ui
 
 
-docker build -f ./daemon-py/Dockerfile -t daemon-py:latest  ./daemon-py
-docker save -o ${TARGET}/temp/daemon-py/daemon-py.tar daemon-py:latest
+docker build -f ./daemon-py/Dockerfile -t modbus-docker:latest  ./daemon-py
+docker save -o ${TARGET}/temp/daemon-py/daemon-py.tar modbus-docker:latest
 
-cd ${TARGET}/temp && zip -r ../dockerTest-1.0-SNAPSHOT.urcapx *  -x "*/.*" && cd -
+cd ${TARGET}/temp && zip -r ../modbusDocker-1.0-SNAPSHOT.urcapx *  -x "*/.*" && cd -
 
 rm -rf ${TARGET}/temp
