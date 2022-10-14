@@ -14,7 +14,6 @@ public class Activator implements BundleActivator {
 
 		context.registerService(DockerRegistrationService.class, daemonService, null);
 		context.registerService(SwingInstallationNodeService.class, installationNodeService, null);
-		// context.registerService(SwingProgramNodeService.class, new DockerDaemonProgramNodeService(), null);
 	}
 
 	@Override

@@ -6,51 +6,31 @@ import com.ur.urcap.api.contribution.installation.CreationContext;
 import com.ur.urcap.api.contribution.installation.InstallationAPIProvider;
 import com.ur.urcap.api.domain.data.DataModel;
 import com.ur.urcap.api.domain.script.ScriptWriter;
-import com.ur.urcap.api.domain.userinteraction.inputvalidation.InputValidationFactory;
-import com.ur.urcap.api.domain.userinteraction.keyboard.KeyboardInputCallback;
-import com.ur.urcap.api.domain.userinteraction.keyboard.KeyboardInputFactory;
-import com.ur.urcap.api.domain.userinteraction.keyboard.KeyboardTextInput;
 
 import java.awt.EventQueue;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class DockerDaemonInstallationNodeContribution implements InstallationNodeContribution {
-	private static final String POPUPTITLE_KEY = "popuptitle";
-
 	private static final String XMLRPC_VARIABLE = "modbus_xmlrpc";
 	private static final String ENABLED_KEY = "enabled";
-	private static final String DEFAULT_VALUE = "Hello Docker Daemon";
 
 	private final DockerDaemonInstallationNodeView view;
 	private final DockerDaemonService daemonService;
-	private final InputValidationFactory inputValidationFactory;
-	private final KeyboardInputFactory keyboardInputFactory;
 	private final DataModel model;
 
 	private Timer uiTimer;
 	private boolean pauseTimer = false;
 
-	private XmlRpcMyDaemonInterface xmlRpcMyDaemonInterface;
-
 	public DockerDaemonInstallationNodeContribution(InstallationAPIProvider apiProvider, DockerDaemonInstallationNodeView view, DataModel model, DockerDaemonService daemonService, CreationContext context) {
-		keyboardInputFactory = apiProvider.getUserInterfaceAPI().getUserInteraction().getKeyboardInputFactory();
-		inputValidationFactory = apiProvider.getUserInterfaceAPI().getUserInteraction().getInputValidationFactory();
 		this.view = view;
 		this.daemonService = daemonService;
 		this.model = model;
-		// this.xmlRpcMyDaemonInterface = new XmlRpcMyDaemonInterface("127.0.0.1", getHostPortMapping());
-		// if (context.getNodeCreationType() == CreationContext.NodeCreationType.NEW) {
-		// 	model.set(POPUPTITLE_KEY, DEFAULT_VALUE);
-		// }
 		applyDesiredDaemonStatus();
 	}
 
 	@Override
 	public void openView() {
-		// view.setPopupText(getPopupTitle());
-
-		//UI updates from non-GUI threads must use EventQueue.invokeLater (or SwingUtilities.invokeLater)
 		uiTimer = new Timer(true);
 		uiTimer.schedule(new TimerTask() {
 			@Override
@@ -77,9 +57,6 @@ public class DockerDaemonInstallationNodeContribution implements InstallationNod
 	@Override
 	public void generateScript(ScriptWriter writer) {
 		writer.assign(XMLRPC_VARIABLE, "rpc_factory(\"xmlrpc\", \"http://127.0.0.1:" + getHostPortMapping() + "/RPC2\")");
-		// Apply the settings to the daemon on program start in the Installation pre-amble
-		// writer.appendLine(XMLRPC_VARIABLE + ".set_title(\"" + getPopupTitle() + "\")");
-
 		writer.appendLine("isConnected = modbus_xmlrpc.reachable()");
 		writer.appendLine("if ( isConnected != True):");
 		writer.appendLine("popup(\"Modbus xmlrpc is not available!\")");
@@ -150,14 +127,7 @@ public class DockerDaemonInstallationNodeContribution implements InstallationNod
 					try {
 						pauseTimer = true;
 						awaitDaemonRunning(5000);
-						// getXmlRpcDaemonInterface().setTitle(getPopupTitle());
 						System.out.println("Trying to reach Modbus Docker daemon...");
-						boolean test = getXmlRpcDaemonInterface().isReachable();
-						if(test) {
-							System.out.println("Daemon is running");
-						}else {
-							System.out.println("Daemon is not running");
-						}
 					} catch(Exception e){
 						System.err.println("Could not set the title in the daemon process.");
 					} finally {
