@@ -27,3 +27,4 @@ replay_pid*
 target/
 .idea/
 .vscode/
+polyscope-ui/target/
