@@ -1,20 +1,20 @@
 schema-version: 1.0
 urcap:
   vendor-id: universal-robots
-  urcap-id: dockerTest
+  urcap-id: modbusDocker
   version: 1.0
-  vendor-name: KRMI Enterprises
-  urcap-name: Docker Test
-  contact-info: Energivej 25, 5260 Odense S, Denmark
-  description: Daemon Sample URCap
-  copyright: Copyright (c) 2009-2021 Universal Robots. All rights reserved.
+  vendor-name: URCaps R us Inc.
+  urcap-name: Modbus RTU - Docker
+  contact-info: 123 URCap Street
+  description: Modbus RTU sample converted to a Docker daemon.
+  copyright: Copyright (c)
   license-type: Sample license
 artifacts:
   - id: daemon-py
     type: docker-image
     expose-ports:
       xmlrpc:
-        container-port: "40405"
+        container-port: "40408"
         protocol: "tcp"
   - id: polyscope-ui
     type: polyscope-bundle

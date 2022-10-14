@@ -23,7 +23,7 @@
 hs_err_pid*
 replay_pid*
 
+# ignore target and private folders.
+target/
 .idea/
 .vscode/
-target/
-polyscope-ui/target/

@@ -10,7 +10,8 @@ import com.ur.urcap.api.domain.data.DataModel;
 
 import java.util.Locale;
 
-public class DockerDaemonInstallationNodeService implements SwingInstallationNodeService<DockerDaemonInstallationNodeContribution, DockerDaemonInstallationNodeView> {
+public class DockerDaemonInstallationNodeService 
+		implements SwingInstallationNodeService<DockerDaemonInstallationNodeContribution, DockerDaemonInstallationNodeView> {
 
 	private final DockerDaemonService daemonService;
 
@@ -20,7 +21,7 @@ public class DockerDaemonInstallationNodeService implements SwingInstallationNod
 
 	@Override
 	public String getTitle(Locale locale) {
-		return "Docker Daemon";
+		return "Modbus RTU Daemon";
 	}
 
 	@Override
@@ -35,7 +36,8 @@ public class DockerDaemonInstallationNodeService implements SwingInstallationNod
 	}
 
 	@Override
-	public DockerDaemonInstallationNodeContribution createInstallationNode(InstallationAPIProvider apiProvider, DockerDaemonInstallationNodeView view, DataModel model, CreationContext context) {
+	public DockerDaemonInstallationNodeContribution createInstallationNode(InstallationAPIProvider apiProvider, DockerDaemonInstallationNodeView view, 
+			DataModel model, CreationContext context) {
 		return new DockerDaemonInstallationNodeContribution(apiProvider, view, model, daemonService, context);
 	}
 
