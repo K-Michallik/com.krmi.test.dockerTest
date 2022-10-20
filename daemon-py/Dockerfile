@@ -3,7 +3,7 @@ FROM i386/python:3.10-slim-buster
 
 COPY requirements.txt ./
 #RUN pip install --no-cache-dir -r requirements.txt
-#Need to get dependencies for wheel to install numpy/matplotlib. Cleans up build tools after installing.
+#Need to get dependencies for wheel to install requirements. Cleans up build tools after installing.
 RUN apt-get update && \
     apt-get install -y \
         build-essential \
