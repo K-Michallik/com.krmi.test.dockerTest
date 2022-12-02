@@ -26,7 +26,7 @@ def reachable():
 
 def init_modbus_communication(slaveaddress):
   global instrument
-  instrument = modbus.Instrument('/dev/ttyTool',slaveaddress)
+  instrument = modbus.Instrument('/dev/ur-ttylink/ttyTool',slaveaddress)
   return True
 
 def tool_modbus_write(register_address, data):

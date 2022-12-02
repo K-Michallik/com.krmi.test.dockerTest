@@ -1,0 +1,25 @@
+apiVersion: v1.0
+metadata:
+  vendorID: universal-robots
+  urcapID: modbus-docker
+  version: "1.0"
+  vendorName: URCaps R us Inc.
+  urcapName: Modbus RTU - Docker
+  contactInfo: 123 URCap Street
+  description: Modbus RTU sample converted to a Docker daemon.
+  startup: manual
+  copyright: Copyright (c)
+  licenseType: Sample license
+artifacts:
+  containers:
+  - name: daemon-py
+    image: modbus-docker:1.0
+    ports:
+    - name: xmlrpc
+      containerPort: 40408
+      protocol: TCP
+    devices:
+    - device: /dev/ur-ttylink:/dev/ur-ttylink
+  polyscopeBundles:
+  - name: polyscope-ui
+    bundle: polyscope-ui-1.0-SNAPSHOT.jar
